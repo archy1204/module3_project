@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Timetable {
-    private LocalDateTime date;
+    private String date;
     private Group group;
     private Teacher teacher;
 }
