@@ -4,16 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import meshkov.model.Subject;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Teacher {
-    private String name;
-    private List<Subject> subjects;
-    private int experience;
+public class Timetable {
+    private LocalDateTime date;
+    private Group group;
+    private Teacher teacher;
 }
