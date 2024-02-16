@@ -1,4 +1,4 @@
-package meshkov.repository;
+package meshkov.repository.imp;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import meshkov.consts.FileConstants;
@@ -6,19 +6,21 @@ import meshkov.exception.JsonParseException;
 import meshkov.exception.StudentNotFoundException;
 import meshkov.model.Group;
 import meshkov.model.Student;
+import meshkov.repository.Repository;
 import meshkov.service.JsonService;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class RepositoryWithJson implements Repository {
-    @JsonDeserialize(contentAs = Student.class)
+    @JsonDeserialize(contentAs = CopyOnWriteArrayList.class)
     private final CopyOnWriteArrayList<Student> students;
 
-    @JsonDeserialize(contentAs = Student.class)
+    //@JsonDeserialize(contentAs = Group.class)
     private final CopyOnWriteArrayList<Group> groups;
 
     private JsonService jsonService;
@@ -28,26 +30,30 @@ public class RepositoryWithJson implements Repository {
 
     public RepositoryWithJson(JsonService jsonService) throws IOException, JsonParseException {
         this.jsonService = jsonService;
-        if (Files.exists(studentFile)) {
-            String json = Files.readString(studentFile);
-            students = (CopyOnWriteArrayList<Student>) jsonService.createObject(json, CopyOnWriteArrayList.class);
-        } else {
-            students = new CopyOnWriteArrayList<Student>();
-            Files.createFile(studentFile);
-        }
+        String json;
 
-        if (Files.exists(groupFile)) {
-            String json = Files.readString(groupFile);
-            groups = (CopyOnWriteArrayList<Group>) jsonService.createObject(json, CopyOnWriteArrayList.class);
-        } else {
-            groups = new CopyOnWriteArrayList<Group>();
+        if (!Files.exists(studentFile))
             Files.createFile(studentFile);
-        }
+
+        if (!Files.exists(groupFile))
+            Files.createFile(groupFile);
+
+        if (!(json = Files.readString(studentFile)).equals(""))
+            students = (CopyOnWriteArrayList<Student>) jsonService.createObject(json, CopyOnWriteArrayList.class);
+        else
+            students = new CopyOnWriteArrayList<Student>();
+
+
+        if (!(json = Files.readString(groupFile)).equals(""))
+            groups = (CopyOnWriteArrayList<Group>) jsonService.createObject(json, CopyOnWriteArrayList.class);
+        else
+            groups = new CopyOnWriteArrayList<Group>();
+
     }
 
     @Override
     public List<Student> getAllStudents() {
-        return new CopyOnWriteArrayList<Student>(students);
+        return new ArrayList<Student>(students);
     }
 
     @Override
@@ -70,5 +76,15 @@ public class RepositoryWithJson implements Repository {
         students.add(student);
         Files.writeString(studentFile, jsonService.createJson(students));
         return student;
+    }
+
+    @Override
+    public Student changeStudentData(int id, Student student) {
+        return null;
+    }
+
+    @Override
+    public Student deleteStudent(int id) throws StudentNotFoundException {
+        return null;
     }
 }

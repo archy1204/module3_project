@@ -4,14 +4,4 @@
 
 <web-app>
   <display-name>Project3 application</display-name>
-
-  <servlet>
-    <servlet-name>StudentServlet</servlet-name>
-    <servlet-class>meshkov.controller.StudentServlet</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>StudentServlet</servlet-name>
-    <url-pattern>/students</url-pattern>
-  </servlet-mapping>
 </web-app>

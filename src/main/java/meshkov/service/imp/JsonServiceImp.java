@@ -4,14 +4,18 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import meshkov.exception.JsonParseException;
+import meshkov.model.Student;
 import meshkov.service.JsonService;
+
+import java.util.LinkedHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Slf4j
 public class JsonServiceImp implements JsonService {
     private ObjectMapper objectMapper;
 
-    public JsonServiceImp(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
+    public JsonServiceImp() {
+        this.objectMapper = new ObjectMapper();
     }
 
     @Override

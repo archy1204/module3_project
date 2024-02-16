@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class StudentRequest {
     private String name;
     private String surname;
-    private String birthDate;
+    private String birthday;
     private String phoneNumber;
 }

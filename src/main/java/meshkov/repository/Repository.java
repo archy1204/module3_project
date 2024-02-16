@@ -1,5 +1,7 @@
 package meshkov.repository;
 
+import meshkov.dto.StudentRequest;
+import meshkov.dto.StudentResponse;
 import meshkov.exception.JsonParseException;
 import meshkov.exception.StudentNotFoundException;
 import meshkov.model.Student;
@@ -17,4 +19,8 @@ public interface Repository {
     List<Student> getStudentsByNameAndSurname(String name, String surname) throws StudentNotFoundException;
 
     Student createStudent(Student student) throws JsonParseException, IOException;
+
+    Student changeStudentData(int id, Student studentUpdate) throws StudentNotFoundException;
+
+    Student deleteStudent(int id) throws StudentNotFoundException;
 }

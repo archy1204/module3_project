@@ -15,7 +15,7 @@ public class StudentResponse {
     private Long id;
     private String name;
     private String surname;
-    private String birthDate;
+    private String birthday;
     private String phoneNumber;
     private Long groupId;
 }
