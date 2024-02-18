@@ -1,6 +1,5 @@
 package meshkov.mapper;
 
-import meshkov.dto.StudentRequest;
 import meshkov.dto.TeacherRequest;
 import meshkov.model.Teacher;
 import org.mapstruct.Mapper;
