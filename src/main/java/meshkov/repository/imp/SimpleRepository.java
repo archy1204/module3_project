@@ -4,9 +4,13 @@ import meshkov.dto.StudentRequest;
 import meshkov.dto.StudentResponse;
 import meshkov.exception.JsonParseException;
 import meshkov.exception.StudentNotFoundException;
+import meshkov.exception.TeacherNotFoundException;
 import meshkov.model.Student;
+import meshkov.model.Subject;
+import meshkov.model.Teacher;
 import meshkov.repository.Repository;
 import meshkov.service.JsonService;
+import meshkov.service.imp.JsonServiceImp;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,13 +19,18 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SimpleRepository implements Repository {
+
+    private static final SimpleRepository INSTANCE = new SimpleRepository();
     private final CopyOnWriteArrayList<Student> students;
-    private JsonService jsonService;
+    private final CopyOnWriteArrayList<Teacher> teachers;
 
-
-    public SimpleRepository(JsonService jsonService) throws IOException, JsonParseException {
+    private SimpleRepository() {
         this.students = new CopyOnWriteArrayList<>();
-        this.jsonService = jsonService;
+        this.teachers = new CopyOnWriteArrayList<>();
+    }
+
+    public static SimpleRepository getInstance() {
+        return INSTANCE;
     }
 
     @Override
@@ -65,5 +74,45 @@ public class SimpleRepository implements Repository {
         Student studentToRemove = students.stream().filter(st -> st.getId() == id).findFirst().orElseThrow(StudentNotFoundException::new);
         students.remove(studentToRemove);
         return studentToRemove;
+    }
+
+    @Override
+    public List<Teacher> getAllTeachers() {
+        return new ArrayList<Teacher>(teachers);
+    }
+
+    @Override
+    public Teacher getTeacherById(int id) throws TeacherNotFoundException {
+        return teachers.stream().filter(st -> st.getId() == id).findFirst().orElseThrow(TeacherNotFoundException::new);
+    }
+
+    @Override
+    public Teacher createTeacher(Teacher teacher) {
+        teacher.setId(teachers.size() + 1);
+        teachers.add(teacher);
+        return teacher;
+    }
+
+    @Override
+    public List<Teacher> getTeachersByNameAndSurname(String name, String surname) throws TeacherNotFoundException {
+        List<Teacher> requiredList = teachers.stream().filter(st -> st.getName().equals(name) && st.getSurname().equals(surname)).toList();
+        if (requiredList.isEmpty())
+            throw new TeacherNotFoundException();
+        else
+            return requiredList;
+    }
+
+    @Override
+    public Teacher addSubjects(int id, List<Subject> subjects) throws TeacherNotFoundException {
+        Teacher teacher = teachers.stream().filter(st -> st.getId() == id).findFirst().orElseThrow(TeacherNotFoundException::new);
+        teacher.getSubjects().addAll(subjects);
+        return teacher;
+    }
+
+    @Override
+    public Teacher deleteTeacher(int id) throws TeacherNotFoundException {
+        Teacher teacherToRemove = teachers.stream().filter(st -> st.getId() == id).findFirst().orElseThrow(TeacherNotFoundException::new);
+        teachers.remove(teacherToRemove);
+        return teacherToRemove;
     }
 }

@@ -4,8 +4,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import meshkov.consts.FileConstants;
 import meshkov.exception.JsonParseException;
 import meshkov.exception.StudentNotFoundException;
+import meshkov.exception.TeacherNotFoundException;
 import meshkov.model.Group;
 import meshkov.model.Student;
+import meshkov.model.Subject;
+import meshkov.model.Teacher;
 import meshkov.repository.Repository;
 import meshkov.service.JsonService;
 
@@ -85,6 +88,36 @@ public class RepositoryWithJson implements Repository {
 
     @Override
     public Student deleteStudent(int id) throws StudentNotFoundException {
+        return null;
+    }
+
+    @Override
+    public List<Teacher> getAllTeachers() {
+        return null;
+    }
+
+    @Override
+    public Teacher getTeacherById(int id) throws TeacherNotFoundException {
+        return null;
+    }
+
+    @Override
+    public Teacher createTeacher(Teacher teacher) {
+        return null;
+    }
+
+    @Override
+    public List<Teacher> getTeachersByNameAndSurname(String name, String surname) throws TeacherNotFoundException {
+        return null;
+    }
+
+    @Override
+    public Teacher addSubjects(int id, List<Subject> subjects) throws TeacherNotFoundException {
+        return null;
+    }
+
+    @Override
+    public Teacher deleteTeacher(int id) throws TeacherNotFoundException {
         return null;
     }
 }

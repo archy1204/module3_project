@@ -1,5 +1,6 @@
 package meshkov.model;
 
+import ch.qos.logback.core.model.Model;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +13,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Group {
+public class Group  {
     private List<Student> students;
     private String groupNumber;
 }

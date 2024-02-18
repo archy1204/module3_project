@@ -1,5 +1,6 @@
 package meshkov.model;
 
+import ch.qos.logback.core.model.Model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -9,10 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import meshkov.dto.StudentRequest;
 import meshkov.dto.StudentResponse;
 import meshkov.exception.JsonParseException;
-import meshkov.exception.StudentNotFoundException;
 import meshkov.mapper.StudentMapper;
 import meshkov.repository.Repository;
-import meshkov.repository.imp.RepositoryWithJson;
 import meshkov.repository.imp.SimpleRepository;
 import meshkov.service.JsonService;
 import meshkov.service.StudentService;
@@ -28,21 +26,15 @@ import java.util.stream.Collectors;
 @WebServlet(name = "StudentServlet", urlPatterns = "/students/*")
 public class StudentServlet extends HttpServlet {
 
-    StudentService studentService;
-    JsonService jsonService;
+    private StudentService studentService;
+    private JsonService jsonService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         StudentMapper studentMapper = StudentMapper.INSTANCE;
         jsonService = new JsonServiceImp();
-        Repository repository = null;
-        try {
-            repository = new SimpleRepository(jsonService);
-        } catch (IOException | JsonParseException e) {
-            log.error(e.getMessage());
-            throw new RuntimeException();
-        }
+        Repository repository = SimpleRepository.getInstance();
         studentService = new StudentServiceImp(repository, studentMapper);
     }
 
@@ -66,7 +58,7 @@ public class StudentServlet extends HttpServlet {
             }
             out.println(jsonResponse);
             out.flush();
-        } else if (queryString == null){
+        } else if (queryString == null) {
             int id = Integer.parseInt(pathInfo.substring(1));
             try {
                 StudentResponse studentResponse = studentService.getStudentById(id);

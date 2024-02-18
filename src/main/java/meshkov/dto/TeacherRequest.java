@@ -1,4 +1,4 @@
-package meshkov.model;
+package meshkov.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,8 +12,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Teacher {
-    private long id;
+public class TeacherRequest {
     private String name;
     private String surname;
     private List<Subject> subjects;
