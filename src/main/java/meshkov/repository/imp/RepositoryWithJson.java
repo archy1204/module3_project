@@ -2,6 +2,7 @@ package meshkov.repository.imp;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import meshkov.consts.FileConstants;
+import meshkov.exception.GroupNotFoundException;
 import meshkov.exception.JsonParseException;
 import meshkov.exception.StudentNotFoundException;
 import meshkov.exception.TeacherNotFoundException;
@@ -118,6 +119,36 @@ public class RepositoryWithJson implements Repository {
 
     @Override
     public Teacher deleteTeacher(int id) throws TeacherNotFoundException {
+        return null;
+    }
+
+    @Override
+    public List<Group> getAllGroups() {
+        return null;
+    }
+
+    @Override
+    public Group getGroupByNumber(int id) throws GroupNotFoundException {
+        return null;
+    }
+
+    @Override
+    public List<Group> getGroupsByNameAndSurname(String name, String surname) throws StudentNotFoundException, GroupNotFoundException {
+        return null;
+    }
+
+    @Override
+    public Group createGroup(Group group) {
+        return null;
+    }
+
+    @Override
+    public Group addStudentsToGroup(int id, List<Integer> studentsId) throws GroupNotFoundException, StudentNotFoundException {
+        return null;
+    }
+
+    @Override
+    public Group deleteGroup(int id) throws GroupNotFoundException {
         return null;
     }
 }

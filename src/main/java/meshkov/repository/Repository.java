@@ -1,8 +1,5 @@
 package meshkov.repository;
 
-import meshkov.dto.StudentRequest;
-import meshkov.dto.StudentResponse;
-import meshkov.dto.TeacherRequest;
 import meshkov.exception.GroupNotFoundException;
 import meshkov.exception.JsonParseException;
 import meshkov.exception.StudentNotFoundException;
@@ -13,9 +10,7 @@ import meshkov.model.Subject;
 import meshkov.model.Teacher;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public interface Repository {
     List<Student> getAllStudents();
@@ -46,7 +41,7 @@ public interface Repository {
 
     List<Group> getAllGroups();
 
-    Group getGroupById(int id) throws GroupNotFoundException;
+    Group getGroupByNumber(int id) throws GroupNotFoundException;
 
     List<Group> getGroupsByNameAndSurname(String name, String surname) throws StudentNotFoundException, GroupNotFoundException;
 

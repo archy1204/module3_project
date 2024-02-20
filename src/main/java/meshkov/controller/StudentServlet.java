@@ -86,7 +86,7 @@ public class StudentServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         try {
             StudentRequest studentRequest = (StudentRequest) jsonService.createObject(reqBody, StudentRequest.class);
-            out.println(studentService.createStudent(studentRequest));
+            out.println(jsonService.createJson(studentService.createStudent(studentRequest)));
             resp.setStatus(201);
         } catch (Exception e) {
             resp.setStatus(400);
@@ -96,6 +96,7 @@ public class StudentServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
         String reqBody = req.getReader().lines().collect(Collectors.joining());
         PrintWriter out = resp.getWriter();
 

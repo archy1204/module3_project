@@ -120,8 +120,8 @@ public class SimpleRepository implements Repository {
     }
 
     @Override
-    public Group getGroupById(int id) throws GroupNotFoundException {
-        return groups.stream().filter(gr -> gr.getId() == id).findFirst().orElseThrow(GroupNotFoundException::new);
+    public Group getGroupByNumber(int id) throws GroupNotFoundException {
+        return groups.stream().filter(gr -> Integer.parseInt(gr.getNumber()) == id).findFirst().orElseThrow(GroupNotFoundException::new);
     }
 
     @Override
@@ -152,7 +152,7 @@ public class SimpleRepository implements Repository {
 
     @Override
     public Group addStudentsToGroup(int id, List<Integer> studentsId) throws GroupNotFoundException, StudentNotFoundException {
-        Group group = getGroupById(id);
+        Group group = getGroupByNumber(id);
         List<Student> requiredStudents = new ArrayList<>();
         for (Integer st : studentsId) {
             requiredStudents.add(getStudentById(st));
@@ -163,7 +163,7 @@ public class SimpleRepository implements Repository {
 
     @Override
     public Group deleteGroup(int id) throws GroupNotFoundException {
-        Group groupToRemove = getGroupById(id);
+        Group groupToRemove = getGroupByNumber(id);
         groups.remove(groupToRemove);
         return groupToRemove;
     }

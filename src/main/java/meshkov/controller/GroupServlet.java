@@ -5,9 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import meshkov.dto.GroupRequest;
-import meshkov.dto.TeacherRequest;
 import meshkov.exception.JsonParseException;
 import meshkov.mapper.GroupMapper;
 import meshkov.model.Group;
@@ -58,21 +58,18 @@ public class GroupServlet extends HttpServlet {
             }
             out.println(jsonResponse);
             out.flush();
-        } else if (queryString == null) {
-            int id = Integer.parseInt(pathInfo.substring(1));
-            try {
-                Group groupResponse = repository.getGroupById(id);
-                out.println(jsonService.createJson(groupResponse));
-                resp.setStatus(200);
-            } catch (Exception e) {
-                resp.setStatus(400);
-            }
         } else {
             try {
+                String number = req.getParameter("number");
                 String name = req.getParameter("name");
                 String surname = req.getParameter("surname");
-                List<Group> groupResponse = repository.getGroupsByNameAndSurname(name, surname);
-                out.println(jsonService.createJson(groupResponse));
+                if (number == null) {
+                    List<Group> groupResponse = repository.getGroupsByNameAndSurname(name, surname);
+                    out.println(jsonService.createJson(groupResponse));
+                } else {
+                    Group groupResponse = repository.getGroupByNumber(Integer.parseInt(number));
+                    out.println(jsonService.createJson(groupResponse));
+                }
                 resp.setStatus(200);
             } catch (Exception e) {
                 resp.setStatus(400);
@@ -82,11 +79,15 @@ public class GroupServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
         String reqBody = req.getReader().lines().collect(Collectors.joining());
         PrintWriter out = resp.getWriter();
         try {
-            GroupRequest groupRequest = (GroupRequest) jsonService.createObject(reqBody, TeacherRequest.class);
-            out.println(repository.createGroup(groupMapper.mapToModel(groupRequest)));
+            GroupRequest groupRequest = (GroupRequest) jsonService.createObject(reqBody, GroupRequest.class);
+            for (int id :groupRequest.getStudents()) {
+                groupRequest.getStudentObjects().add(repository.getStudentById(id));
+            }
+            out.println(jsonService.createJson(repository.createGroup(groupMapper.mapToModel(groupRequest))));
             resp.setStatus(201);
         } catch (Exception e) {
             resp.setStatus(400);
@@ -94,16 +95,21 @@ public class GroupServlet extends HttpServlet {
         }
     }
 
+    @SneakyThrows
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String reqBody = req.getReader().lines().collect(Collectors.joining());
         PrintWriter out = resp.getWriter();
 
         int id = Integer.parseInt(req.getPathInfo().substring(1));
+        /*List<Integer> ids = List.of(1, 2, 3);
+        String str = jsonService.createJson(ids);
+        ids = (List<Integer>) jsonService.createObject(str, ArrayList.class);
+        out.println(str);*/
 
         try {
-            List<Integer> subject = (List<Integer>) jsonService.createObject(reqBody, List.class);
-            Group group = repository.addStudentsToGroup(id, subject);
+            List<Integer> students = (List<Integer>) jsonService.createObject(reqBody, List.class);
+            Group group = repository.addStudentsToGroup(id, students);
             out.println(jsonService.createJson(group));
             resp.setStatus(204);
         } catch (Exception e) {

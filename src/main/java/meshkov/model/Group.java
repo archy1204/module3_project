@@ -17,5 +17,4 @@ public class Group  {
     private long id;
     private String number;
     private List<Student> students;
-    private String groupNumber;
 }

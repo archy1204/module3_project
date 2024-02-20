@@ -1,5 +1,7 @@
 package meshkov.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -83,11 +85,12 @@ public class TeacherServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
         String reqBody = req.getReader().lines().collect(Collectors.joining());
         PrintWriter out = resp.getWriter();
         try {
             TeacherRequest teacherRequest = (TeacherRequest) jsonService.createObject(reqBody, TeacherRequest.class);
-            out.println(repository.createTeacher(teacherMapper.mapToModel(teacherRequest)));
+            out.println(jsonService.createJson(repository.createTeacher(teacherMapper.mapToModel(teacherRequest))));
             resp.setStatus(201);
         } catch (Exception e) {
             resp.setStatus(400);
@@ -103,7 +106,8 @@ public class TeacherServlet extends HttpServlet {
         int id = Integer.parseInt(req.getPathInfo().substring(1));
 
         try {
-            List<Subject> subject = (List<Subject>) jsonService.createObject(reqBody, List.class);
+
+            List<Subject> subject =  (new ObjectMapper()).readValue(reqBody, new TypeReference<>() {});
             Teacher teacher = repository.addSubjects(id, subject);
             out.println(jsonService.createJson(teacher));
             resp.setStatus(204);
