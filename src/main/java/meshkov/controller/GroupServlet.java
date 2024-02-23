@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import meshkov.dto.GroupRequest;
+import meshkov.exception.InvalidRequestException;
 import meshkov.exception.JsonParseException;
 import meshkov.mapper.GroupMapper;
 import meshkov.model.Group;
@@ -35,7 +36,6 @@ public class GroupServlet extends HttpServlet {
         groupMapper = GroupMapper.INSTANCE;
         jsonService = new JsonServiceImp();
         repository = SimpleRepository.getInstance();
-
     }
 
     @Override
@@ -63,12 +63,14 @@ public class GroupServlet extends HttpServlet {
                 String number = req.getParameter("number");
                 String name = req.getParameter("name");
                 String surname = req.getParameter("surname");
-                if (number == null) {
+                if (name != null && surname != null) {
                     List<Group> groupResponse = repository.getGroupsByNameAndSurname(name, surname);
                     out.println(jsonService.createJson(groupResponse));
-                } else {
+                } else if (number != null) {
                     Group groupResponse = repository.getGroupByNumber(Integer.parseInt(number));
                     out.println(jsonService.createJson(groupResponse));
+                } else {
+                    throw new InvalidRequestException();
                 }
                 resp.setStatus(200);
             } catch (Exception e) {
@@ -102,10 +104,6 @@ public class GroupServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         int id = Integer.parseInt(req.getPathInfo().substring(1));
-        /*List<Integer> ids = List.of(1, 2, 3);
-        String str = jsonService.createJson(ids);
-        ids = (List<Integer>) jsonService.createObject(str, ArrayList.class);
-        out.println(str);*/
 
         try {
             List<Integer> students = (List<Integer>) jsonService.createObject(reqBody, List.class);

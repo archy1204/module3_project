@@ -9,7 +9,7 @@ import meshkov.model.Teacher;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-02-21T01:48:11+0300",
+    date = "2024-02-23T18:29:18+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 18.0.1.1 (Oracle Corporation)"
 )
 public class TeacherMapperImpl implements TeacherMapper {

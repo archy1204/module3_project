@@ -13,8 +13,8 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Group  {
-    private long id;
+public class Group implements Checkable {
+    private int id;
     private String number;
     private List<Student> students;
 }

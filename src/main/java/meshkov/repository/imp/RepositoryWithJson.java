@@ -6,10 +6,7 @@ import meshkov.exception.GroupNotFoundException;
 import meshkov.exception.JsonParseException;
 import meshkov.exception.StudentNotFoundException;
 import meshkov.exception.TeacherNotFoundException;
-import meshkov.model.Group;
-import meshkov.model.Student;
-import meshkov.model.Subject;
-import meshkov.model.Teacher;
+import meshkov.model.*;
 import meshkov.repository.Repository;
 import meshkov.service.JsonService;
 
@@ -150,5 +147,50 @@ public class RepositoryWithJson implements Repository {
     @Override
     public Group deleteGroup(int id) throws GroupNotFoundException {
         return null;
+    }
+
+    @Override
+    public List<Timetable> getAllTimetable() {
+        return null;
+    }
+
+    @Override
+    public List<Timetable> getTimetableByGroupNumber(int number) {
+        return null;
+    }
+
+    @Override
+    public List<Timetable> getTimetableByStudent(String name, String surname) {
+        return null;
+    }
+
+    @Override
+    public List<Timetable> getTimetableByTeacher(String name, String surname) {
+        return null;
+    }
+
+    @Override
+    public List<Timetable> getTimetableByDate(String date) {
+        return null;
+    }
+
+    @Override
+    public Timetable createTimetable(Timetable timetable) {
+        return null;
+    }
+
+    @Override
+    public List<Timetable> updateTimetable(String date, List<Timetable> newTimetables) {
+        return null;
+    }
+
+    @Override
+    public List<Timetable> deleteTimetableByDateAndGroupNumber(String date, int groupNumber) {
+        return null;
+    }
+
+    @Override
+    public void deleteAllTimetable() {
+
     }
 }

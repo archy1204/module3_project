@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import meshkov.dto.TeacherRequest;
+import meshkov.exception.InvalidRequestException;
 import meshkov.exception.JsonParseException;
 import meshkov.mapper.TeacherMapper;
 import meshkov.model.Subject;
@@ -38,7 +39,6 @@ public class TeacherServlet extends HttpServlet {
         teacherMapper = TeacherMapper.INSTANCE;
         jsonService = new JsonServiceImp();
         repository = SimpleRepository.getInstance();
-
     }
 
     @Override
@@ -74,6 +74,8 @@ public class TeacherServlet extends HttpServlet {
             try {
                 String name = req.getParameter("name");
                 String surname = req.getParameter("surname");
+                if (name == null || surname == null)
+                    throw new InvalidRequestException();
                 List<Teacher> teacherResponse = repository.getTeachersByNameAndSurname(name, surname);
                 out.println(jsonService.createJson(teacherResponse));
                 resp.setStatus(200);

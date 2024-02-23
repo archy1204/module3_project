@@ -1,13 +1,7 @@
 package meshkov.repository;
 
-import meshkov.exception.GroupNotFoundException;
-import meshkov.exception.JsonParseException;
-import meshkov.exception.StudentNotFoundException;
-import meshkov.exception.TeacherNotFoundException;
-import meshkov.model.Group;
-import meshkov.model.Student;
-import meshkov.model.Subject;
-import meshkov.model.Teacher;
+import meshkov.exception.*;
+import meshkov.model.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -50,4 +44,23 @@ public interface Repository {
     public Group addStudentsToGroup(int id, List<Integer> studentsId) throws GroupNotFoundException, StudentNotFoundException;
 
     Group deleteGroup(int id) throws GroupNotFoundException;
+
+
+    List<Timetable> getAllTimetable();
+
+    List<Timetable> getTimetableByGroupNumber(int number) throws TimetableNotFoundException;
+
+    List<Timetable> getTimetableByStudent(String name, String surname) throws StudentNotFoundException, GroupNotFoundException;
+
+    List<Timetable> getTimetableByTeacher(String name, String surname) throws TeacherNotFoundException;
+
+    List<Timetable> getTimetableByDate(String date);
+
+    Timetable createTimetable(Timetable timetable);
+
+    public List<Timetable> updateTimetable(String date, List<Timetable> newTimetables);
+
+    List<Timetable> deleteTimetableByDateAndGroupNumber(String date, int groupNumber);
+
+    public void deleteAllTimetable();
 }

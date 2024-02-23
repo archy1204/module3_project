@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import meshkov.dto.StudentRequest;
 import meshkov.dto.StudentResponse;
+import meshkov.exception.InvalidRequestException;
 import meshkov.exception.JsonParseException;
 import meshkov.mapper.StudentMapper;
 import meshkov.repository.Repository;
@@ -71,6 +72,8 @@ public class StudentServlet extends HttpServlet {
             try {
                 String name = req.getParameter("name");
                 String surname = req.getParameter("surname");
+                if (name == null || surname == null)
+                    throw new InvalidRequestException();
                 List<StudentResponse> studentResponse = studentService.getStudentsByNameAndSurname(name, surname);
                 out.println(jsonService.createJson(studentResponse));
                 resp.setStatus(200);

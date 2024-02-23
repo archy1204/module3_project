@@ -5,6 +5,7 @@ import meshkov.dto.StudentResponse;
 import meshkov.exception.JsonParseException;
 import meshkov.exception.StudentNotFoundException;
 import meshkov.mapper.StudentMapper;
+import meshkov.model.Group;
 import meshkov.model.Student;
 import meshkov.repository.Repository;
 import meshkov.service.StudentService;
@@ -33,14 +34,14 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public StudentResponse createStudent(StudentRequest studentRequest) throws IOException, JsonParseException {
-        Student student = studentMapper.mapToModel(studentRequest);
-        return studentMapper.mapToResponse(repository.createStudent(student));
+    public List<StudentResponse> getStudentsByNameAndSurname(String name, String surname) throws StudentNotFoundException {
+        return repository.getStudentsByNameAndSurname(name, surname).stream().map(studentMapper::mapToResponse).toList();
     }
 
     @Override
-    public List<StudentResponse> getStudentsByNameAndSurname(String name, String surname) throws StudentNotFoundException {
-        return repository.getStudentsByNameAndSurname(name, surname).stream().map(studentMapper::mapToResponse).toList();
+    public StudentResponse createStudent(StudentRequest studentRequest) throws IOException, JsonParseException {
+        Student student = studentMapper.mapToModel(studentRequest);
+        return studentMapper.mapToResponse(repository.createStudent(student));
     }
 
     @Override

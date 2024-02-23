@@ -13,10 +13,11 @@ import java.time.LocalTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Student {
-    private long id;
+public class Student implements Checkable {
+    private int id;
     private String name;
     private String surname;
     private String birthday;
     private String phoneNumber;
+    private String groupNumber;
 }

@@ -5,14 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Timetable {
-    private String date;
-    private Group group;
-    private Teacher teacher;
+public class Timetable implements Checkable {
+    private int groupNumber;
+    private int teacherId;
+    private String startDateTime;
+    private String endDateTime;
 }
