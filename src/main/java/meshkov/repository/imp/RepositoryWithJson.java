@@ -63,6 +63,11 @@ public class RepositoryWithJson implements Repository {
     }
 
     @Override
+    public List<Student> getStudentListById(List<Integer> ids) {
+        return null;
+    }
+
+    @Override
     public List<Student> getStudentsByNameAndSurname(String name, String surname) throws StudentNotFoundException {
         List<Student> requiredList = students.stream().filter(st -> st.getName().equals(name) && st.getSurname().equals(surname)).toList();
         if (requiredList.isEmpty())
@@ -140,7 +145,7 @@ public class RepositoryWithJson implements Repository {
     }
 
     @Override
-    public Group addStudentsToGroup(int id, List<Integer> studentsId) throws GroupNotFoundException, StudentNotFoundException {
+    public Group addStudentsToGroup(int number, List<Integer> studentsId) throws GroupNotFoundException, StudentNotFoundException {
         return null;
     }
 
@@ -155,7 +160,7 @@ public class RepositoryWithJson implements Repository {
     }
 
     @Override
-    public List<Timetable> getTimetableByGroupNumber(int number) {
+    public List<Timetable> getTimetableByGroupNumber(String number) {
         return null;
     }
 
@@ -166,6 +171,11 @@ public class RepositoryWithJson implements Repository {
 
     @Override
     public List<Timetable> getTimetableByTeacher(String name, String surname) {
+        return null;
+    }
+
+    @Override
+    public List<Timetable> getTimetableByTeacher(int id) throws TeacherNotFoundException {
         return null;
     }
 
@@ -185,7 +195,7 @@ public class RepositoryWithJson implements Repository {
     }
 
     @Override
-    public List<Timetable> deleteTimetableByDateAndGroupNumber(String date, int groupNumber) {
+    public List<Timetable> deleteTimetableByDateAndGroupNumber(String date, String groupNumber) {
         return null;
     }
 

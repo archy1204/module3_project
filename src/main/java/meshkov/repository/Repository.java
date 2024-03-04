@@ -9,6 +9,8 @@ import java.util.List;
 public interface Repository {
     List<Student> getAllStudents();
 
+    List<Student> getStudentListById(List<Integer> ids) throws StudentNotFoundException;
+
     Student getStudentById(int id) throws StudentNotFoundException;
 
     List<Student> getStudentsByNameAndSurname(String name, String surname) throws StudentNotFoundException;
@@ -41,18 +43,20 @@ public interface Repository {
 
     Group createGroup(Group group);
 
-    public Group addStudentsToGroup(int id, List<Integer> studentsId) throws GroupNotFoundException, StudentNotFoundException;
+    public Group addStudentsToGroup(int number, List<Integer> studentsId) throws GroupNotFoundException, StudentNotFoundException;
 
     Group deleteGroup(int id) throws GroupNotFoundException;
 
 
     List<Timetable> getAllTimetable();
 
-    List<Timetable> getTimetableByGroupNumber(int number) throws TimetableNotFoundException;
+    List<Timetable> getTimetableByGroupNumber(String number) throws TimetableNotFoundException;
 
     List<Timetable> getTimetableByStudent(String name, String surname) throws StudentNotFoundException, GroupNotFoundException;
 
     List<Timetable> getTimetableByTeacher(String name, String surname) throws TeacherNotFoundException;
+
+    List<Timetable> getTimetableByTeacher(int id) throws TeacherNotFoundException;
 
     List<Timetable> getTimetableByDate(String date);
 
@@ -60,7 +64,7 @@ public interface Repository {
 
     public List<Timetable> updateTimetable(String date, List<Timetable> newTimetables);
 
-    List<Timetable> deleteTimetableByDateAndGroupNumber(String date, int groupNumber);
+    List<Timetable> deleteTimetableByDateAndGroupNumber(String date, String groupNumber);
 
     public void deleteAllTimetable();
 }

@@ -1,11 +1,10 @@
 package meshkov.model;
 
-import ch.qos.logback.core.model.Model;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import meshkov.checks.Checkable;
 
 import java.util.List;
 

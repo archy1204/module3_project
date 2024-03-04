@@ -1,6 +1,7 @@
 package meshkov.checks;
 
-import meshkov.model.Checkable;
+import lombok.SneakyThrows;
+import meshkov.exception.*;
 
 public abstract class Middleware {
     private Middleware next;
@@ -15,9 +16,9 @@ public abstract class Middleware {
         return first;
     }
 
-    public abstract boolean check(Checkable model);
+    public abstract boolean check(Checkable model) throws TimetableNotFoundException, GroupNotFoundException, TeacherNotFoundException;
 
-
+@SneakyThrows
     protected boolean checkNext(Checkable model) {
         if (next == null) {
             return true;

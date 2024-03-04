@@ -1,4 +1,4 @@
-package meshkov.model;
+package meshkov.checks;
 
 public interface Checkable {
 }

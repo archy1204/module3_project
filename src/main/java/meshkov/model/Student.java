@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import meshkov.checks.NameCheckable;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -13,7 +14,7 @@ import java.time.LocalTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Student implements Checkable {
+public class Student implements NameCheckable {
     private int id;
     private String name;
     private String surname;

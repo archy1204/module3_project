@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import meshkov.checks.NameCheckable;
 import meshkov.model.Subject;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Teacher implements Checkable {
+public class Teacher implements NameCheckable {
     private int id;
     private String name;
     private String surname;

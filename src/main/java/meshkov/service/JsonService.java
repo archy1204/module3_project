@@ -1,7 +1,5 @@
 package meshkov.service;
 
-import meshkov.dto.StudentRequest;
-import meshkov.dto.StudentResponse;
 import meshkov.exception.JsonParseException;
 
 public interface JsonService {
