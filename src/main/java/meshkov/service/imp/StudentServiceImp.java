@@ -56,6 +56,7 @@ public class StudentServiceImp implements StudentService {
     @Override
     public Student createStudent(StudentRequest studentRequest) throws IOException, JsonParseException, TeacherNotFoundException, StudentNotFoundException, GroupNotFoundException, InvalidArgumentsException, TimetableNotFoundException {
         log.debug("createStudent method invoked");
+        log.debug("studentRequest = {}", studentRequest);
         Student newStudent = studentMapper.mapToModel(studentRequest);
 
         if (!middleware.check(newStudent))
