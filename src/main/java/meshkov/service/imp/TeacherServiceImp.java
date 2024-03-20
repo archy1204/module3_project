@@ -1,10 +1,11 @@
 package meshkov.service.imp;
 
 import lombok.extern.slf4j.Slf4j;
-import meshkov.checks.*;
+import meshkov.checks.Middleware;
+import meshkov.checks.NameAndSurnameCheck;
+import meshkov.checks.SubjectsCheck;
 import meshkov.dto.TeacherRequest;
 import meshkov.exception.*;
-import meshkov.mapper.StudentMapper;
 import meshkov.mapper.TeacherMapper;
 import meshkov.model.Subject;
 import meshkov.model.Teacher;
@@ -19,15 +20,17 @@ public class TeacherServiceImp implements TeacherService {
     private final Repository repository;
     private final TeacherMapper teacherMapper;
 
-    private final Middleware middleware = Middleware.link(
-            new NameAndSurnameCheck(),
-            new SubjectsCheck()
-    );
+    private final Middleware middleware;
 
     public TeacherServiceImp(Repository repository, TeacherMapper teacherMapper) {
         log.debug("constructor method invoked");
         this.repository = repository;
         this.teacherMapper = teacherMapper;
+
+        middleware = Middleware.link(
+                new NameAndSurnameCheck(),
+                new SubjectsCheck(repository)
+        );
     }
 
     @Override
@@ -69,6 +72,7 @@ public class TeacherServiceImp implements TeacherService {
         Teacher teacherToCheck = new Teacher();
         teacherToCheck.setSubjects(subjects);
         teacherToCheck.setId(id);
+        teacherToCheck.setExperience(-1);
         if (!middleware.check(teacherToCheck))
             throw new InvalidArgumentsException();
         return repository.addSubjects(id, subjects);

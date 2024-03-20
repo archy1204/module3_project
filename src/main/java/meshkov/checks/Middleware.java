@@ -2,10 +2,18 @@ package meshkov.checks;
 
 import lombok.SneakyThrows;
 import meshkov.exception.*;
+import meshkov.repository.Repository;
 
 public abstract class Middleware {
     private Middleware next;
+    protected Repository repository;
 
+    public Middleware() {
+    }
+
+    public Middleware(Repository repository) {
+        this.repository = repository;
+    }
 
     public static Middleware link(Middleware first, Middleware... chain) {
         Middleware head = first;

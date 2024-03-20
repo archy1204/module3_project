@@ -12,16 +12,23 @@ import java.util.List;
 @Slf4j
 public class StudentsInGroupCheck extends Middleware {
 
-    private final Repository repository = SimpleRepository.getInstance();
+    public StudentsInGroupCheck(Repository repository) {
+        super(repository);
+    }
 
     @Override
     public boolean check(Checkable model) throws GroupNotFoundException {
         log.debug("StudentsInGroup check is processing");
         Group groupToCheck = (Group) model;
-        if (groupToCheck.getId() == -1)
+
+            for (Student student : groupToCheck.getStudents()) {
+                if (student.getGroupNumber() != null)
+                    return false;
+            }
             return checkNext(model);
 
-        List<Integer> oldStudentsIds = repository.getGroupByNumber(Integer.parseInt(groupToCheck.getNumber())).getStudents()
+
+        /*List<Integer> oldStudentsIds = repository.getGroupByNumber(groupToCheck.getNumber()).getStudents()
                 .stream().map(Student::getId).toList();
         List<Integer> newStudentsIds = groupToCheck.getStudents().stream().map(Student::getId).toList();
 
@@ -33,6 +40,6 @@ public class StudentsInGroupCheck extends Middleware {
             }
         }
         log.debug("StudentsInGroup check SUCCESS");
-        return checkNext(model);
+        return checkNext(model);*/
     }
 }

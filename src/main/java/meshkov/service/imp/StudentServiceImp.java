@@ -21,16 +21,18 @@ public class StudentServiceImp implements StudentService {
     private final Repository repository;
     private final StudentMapper studentMapper;
 
-    private final Middleware middleware = Middleware.link(
-            new NameAndSurnameCheck(),
-            new BirthdayCheck(),
-            new PhoneNumberCheck()
-    );
+    private final Middleware middleware;
 
     public StudentServiceImp(Repository repository, StudentMapper studentMapper) {
         log.debug("constructor method invoked");
         this.repository = repository;
         this.studentMapper = studentMapper;
+
+        middleware = Middleware.link(
+                new NameAndSurnameCheck(),
+                new BirthdayCheck(repository),
+                new PhoneNumberCheck(repository)
+        );
     }
 
     @Override

@@ -87,7 +87,7 @@ public class GroupServlet extends HttpServlet {
                     out.flush();
                 } else if (number != null) {
                     log.debug("number = {}", number);
-                    Group groupResponse = groupService.getGroupByNumber(Integer.parseInt(number));
+                    Group groupResponse = groupService.getGroupByNumber(number);
                     out.println(jsonService.createJson(groupResponse));
                     out.flush();
                 } else {
@@ -147,12 +147,12 @@ public class GroupServlet extends HttpServlet {
         String reqBody = req.getReader().lines().collect(Collectors.joining());
         PrintWriter out = resp.getWriter();
 
-        int id = Integer.parseInt(req.getPathInfo().substring(1));
-        log.debug("id = {}", id);
+        String number = req.getPathInfo().substring(1);
+        log.debug("number = {}", number);
 
         try {
             List<Integer> students = (List<Integer>) jsonService.createObject(reqBody, List.class);
-            Group group = groupService.addStudentsToGroup(id, students);
+            Group group = groupService.addStudentsToGroup(number, students);
             out.println(jsonService.createJson(group));
             out.flush();
             resp.setStatus(204);
@@ -183,11 +183,11 @@ public class GroupServlet extends HttpServlet {
         log.debug("doDelete method invoked");
         PrintWriter out = resp.getWriter();
 
-        int id = Integer.parseInt(req.getPathInfo().substring(1));
-        log.debug("id = {}", id);
+        String number = req.getPathInfo().substring(1);
+        log.debug("number = {}", number);
 
         try {
-            Group group = groupService.deleteGroup(id);
+            Group group = groupService.deleteGroup(number);
             out.println(jsonService.createJson(group));
             out.flush();
             resp.setStatus(200);

@@ -10,13 +10,13 @@ public interface GroupService {
 
     List<Group> getAllGroups();
 
-    Group getGroupByNumber(int id) throws GroupNotFoundException;
+    Group getGroupByNumber(String number) throws GroupNotFoundException;
 
     List<Group> getGroupsByNameAndSurname(String name, String surname) throws StudentNotFoundException, GroupNotFoundException;
 
     Group createGroup(GroupRequest groupRequest) throws StudentNotFoundException, GroupNotFoundException, InvalidArgumentsException, TeacherNotFoundException, TimetableNotFoundException, InvalidAmountException;
 
-    public Group addStudentsToGroup(int number, List<Integer> studentsId) throws StudentNotFoundException, GroupNotFoundException, InvalidArgumentsException, TeacherNotFoundException, TimetableNotFoundException, InvalidAmountException;
+    public Group addStudentsToGroup(String number, List<Integer> studentsId) throws StudentNotFoundException, GroupNotFoundException, InvalidArgumentsException, TeacherNotFoundException, TimetableNotFoundException, InvalidAmountException;
 
-    Group deleteGroup(int id) throws GroupNotFoundException;
+    Group deleteGroup(String number) throws GroupNotFoundException;
 }

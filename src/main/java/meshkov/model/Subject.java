@@ -16,5 +16,7 @@ public enum Subject {
     @JsonProperty("Philosophy")
     PHILOSOPHY,
     @JsonProperty("Sociology")
-    SOCIOLOGY
+    SOCIOLOGY,
+    @JsonProperty("Physics")
+    PHYSICS
 }

@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 @Slf4j
 public class DateInTimetableCheck extends Middleware {
+
     @Override
     public boolean check(Checkable model) {
         log.debug("DateInTimetable check is processing");

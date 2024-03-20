@@ -37,15 +37,15 @@ public interface Repository {
 
     List<Group> getAllGroups();
 
-    Group getGroupByNumber(int id) throws GroupNotFoundException;
+    Group getGroupByNumber(String number) throws GroupNotFoundException;
 
     List<Group> getGroupsByNameAndSurname(String name, String surname) throws StudentNotFoundException, GroupNotFoundException;
 
     Group createGroup(Group group);
 
-    public Group addStudentsToGroup(int number, List<Integer> studentsId) throws GroupNotFoundException, StudentNotFoundException;
+    public Group addStudentsToGroup(String number, List<Integer> studentsId) throws GroupNotFoundException, StudentNotFoundException;
 
-    Group deleteGroup(int id) throws GroupNotFoundException;
+    Group deleteGroup(String number) throws GroupNotFoundException;
 
 
     List<Timetable> getAllTimetable();

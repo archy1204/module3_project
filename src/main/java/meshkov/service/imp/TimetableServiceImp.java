@@ -28,11 +28,7 @@ public class TimetableServiceImp implements TimetableService {
     private final int maxLessons;
 
 
-    private final Middleware middleware = Middleware.link(
-            new DateInTimetableCheck(),
-            new GroupInTimeTableCheck(),
-            new TeacherInTimetableCheck()
-    );
+    private final Middleware middleware;
 
     public TimetableServiceImp(Repository repository) {
         log.debug("constructor method invoked");
@@ -45,6 +41,12 @@ public class TimetableServiceImp implements TimetableService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        middleware = Middleware.link(
+                new DateInTimetableCheck(),
+                new GroupInTimeTableCheck(repository),
+                new TeacherInTimetableCheck(repository)
+        );
     }
 
     @Override
@@ -89,15 +91,15 @@ public class TimetableServiceImp implements TimetableService {
             throw new InvalidArgumentsException();
 
         DateTimeFormatter originFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
-        DateTimeFormatter requiredFormat = DateTimeFormatter.ofPattern("d/MM/yyyy");
-
         LocalDate date = LocalDate.parse(timetable.getStartDateTime(), originFormat);
+
+        DateTimeFormatter requiredFormat = DateTimeFormatter.ofPattern("d/MM/yyyy");
         String reqDate = requiredFormat.format(date);
 
         String groupNumber = timetable.getGroupNumber();
         long amount = repository.getTimetableByDate(reqDate).stream().filter(tb -> tb.getGroupNumber().equals(groupNumber)).count();
 
-        if ((amount + 1) > maxLessons)
+        if ((amount + 1) <= maxLessons)
             return repository.createTimetable(timetable);
         else
             throw new InvalidAmountException();
@@ -114,17 +116,15 @@ public class TimetableServiceImp implements TimetableService {
                 throw new InvalidArgumentsException();
         }
 
-        long amountOfDate;
-        long amountOfGroup;
+        int count;
         HashMap<String, Integer> counts = new HashMap<>();
         for (Timetable newTimetable : newTimetables) {
             String groupNumber = newTimetable.getGroupNumber();
-            counts.put(groupNumber, counts.get(groupNumber) + 1);
+            count = counts.get(groupNumber) != null ? counts.get(groupNumber) : 0;
+            counts.put(groupNumber, count + 1);
 
-            amountOfGroup = repository.getTimetableByGroupNumber(groupNumber).size();
-            amountOfDate = repository.getTimetableByDate(date).stream().filter(tb -> tb.getGroupNumber().equals(groupNumber)).count();
 
-            if ((amountOfGroup - amountOfDate) + counts.get(groupNumber) > maxLessons)
+            if (counts.get(groupNumber) > maxLessons)
                 throw new InvalidAmountException();
         }
 

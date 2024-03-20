@@ -8,18 +8,27 @@ import meshkov.repository.imp.SimpleRepository;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 public class GroupInTimeTableCheck extends Middleware {
 
-    private final Repository repository = SimpleRepository.getInstance();
+    public GroupInTimeTableCheck(Repository repository) {
+        super(repository);
+    }
 
     @Override
     public boolean check(Checkable model) throws TimetableNotFoundException {
         log.debug("GroupInTimeTable check is processing");
         Timetable timetableToCheck = (Timetable) model;
-        List<Timetable> groupTimetables = repository.getTimetableByGroupNumber(timetableToCheck.getGroupNumber());
+        List<Timetable> groupTimetables;
+
+        try {
+            groupTimetables = repository.getTimetableByGroupNumber(timetableToCheck.getGroupNumber());
+        } catch (TimetableNotFoundException e) {
+            groupTimetables = new ArrayList<>();
+        }
 
         DateTimeFormatter timetableFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
         LocalDateTime startTimeToCheck = LocalDateTime.parse(timetableToCheck.getStartDateTime(), timetableFormat);

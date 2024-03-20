@@ -13,7 +13,9 @@ import java.util.List;
 @Slf4j
 public class TeacherInTimetableCheck extends Middleware {
 
-    private final Repository repository = SimpleRepository.getInstance();
+    public TeacherInTimetableCheck(Repository repository) {
+        super(repository);
+    }
 
     @Override
     public boolean check(Checkable model) throws TeacherNotFoundException {

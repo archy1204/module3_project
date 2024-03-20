@@ -130,7 +130,7 @@ public class RepositoryWithJson implements Repository {
     }
 
     @Override
-    public Group getGroupByNumber(int id) throws GroupNotFoundException {
+    public Group getGroupByNumber(String number) throws GroupNotFoundException {
         return null;
     }
 
@@ -145,12 +145,12 @@ public class RepositoryWithJson implements Repository {
     }
 
     @Override
-    public Group addStudentsToGroup(int number, List<Integer> studentsId) throws GroupNotFoundException, StudentNotFoundException {
+    public Group addStudentsToGroup(String number, List<Integer> studentsId) throws GroupNotFoundException, StudentNotFoundException {
         return null;
     }
 
     @Override
-    public Group deleteGroup(int id) throws GroupNotFoundException {
+    public Group deleteGroup(String number) throws GroupNotFoundException {
         return null;
     }
 

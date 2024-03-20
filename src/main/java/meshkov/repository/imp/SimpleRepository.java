@@ -158,10 +158,10 @@ public class SimpleRepository implements Repository {
     }
 
     @Override
-    public Group getGroupByNumber(int id) throws GroupNotFoundException {
+    public Group getGroupByNumber(String number) throws GroupNotFoundException {
         log.debug("SimpleRepository - getGroupByNumber method invoked");
-        log.debug("id = {}", id);
-        return groups.stream().filter(gr -> Integer.parseInt(gr.getNumber()) == id).findFirst().orElseThrow(GroupNotFoundException::new);
+        log.debug("id = {}", number);
+        return groups.stream().filter(gr -> gr.getNumber().equals(number)).findFirst().orElseThrow(GroupNotFoundException::new);
     }
 
     @Override
@@ -196,7 +196,7 @@ public class SimpleRepository implements Repository {
     }
 
     @Override
-    public Group addStudentsToGroup(int number, List<Integer> studentsId) throws GroupNotFoundException, StudentNotFoundException {
+    public Group addStudentsToGroup(String number, List<Integer> studentsId) throws GroupNotFoundException, StudentNotFoundException {
         log.debug("SimpleRepository - addStudentsToGroup method invoked");
         log.debug("number = {}, studentsId = {}", number, studentsId);
         Group group = getGroupByNumber(number);
@@ -210,10 +210,10 @@ public class SimpleRepository implements Repository {
     }
 
     @Override
-    public Group deleteGroup(int id) throws GroupNotFoundException {
+    public Group deleteGroup(String number) throws GroupNotFoundException {
         log.debug("SimpleRepository - deleteGroup method invoked");
-        log.debug("id = {}", id);
-        Group groupToRemove = getGroupByNumber(id);
+        log.debug("id = {}", number);
+        Group groupToRemove = getGroupByNumber(number);
         groupToRemove.getStudents().forEach(student -> student.setGroupNumber(null));
         groups.remove(groupToRemove);
         return groupToRemove;
@@ -325,6 +325,13 @@ public class SimpleRepository implements Repository {
     @Override
     public void deleteAllTimetable() {
         log.debug("SimpleRepository - deleteAllTimetable method invoked");
+        timetables.clear();
+    }
+
+    public void clearDB() {
+        students.clear();
+        teachers.clear();
+        groups.clear();
         timetables.clear();
     }
 }

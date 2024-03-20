@@ -12,14 +12,18 @@ import java.util.List;
 @Slf4j
 public class SubjectsCheck extends Middleware {
 
-    private final Repository repository = SimpleRepository.getInstance();
+    public SubjectsCheck(Repository repository) {
+        super(repository);
+    }
 
     @Override
     public boolean check(Checkable model) throws TeacherNotFoundException {
         log.debug("Subjects check is processing");
         Teacher teacher = (Teacher) model;
-        if (teacher.getId() == -1)
+        if (teacher.getId() == -1) {
+            log.debug("Subjects check SUCCESS");
             return checkNext(model);
+        }
 
         List<Subject> subjects = repository.getTeacherById(teacher.getId()).getSubjects();
         for (Subject addedSubject : teacher.getSubjects()) {

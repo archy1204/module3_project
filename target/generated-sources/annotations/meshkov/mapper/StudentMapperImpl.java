@@ -6,7 +6,7 @@ import meshkov.model.Student;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-04T01:41:00+0300",
+    date = "2024-03-16T19:48:10+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 18.0.1.1 (Oracle Corporation)"
 )
 public class StudentMapperImpl implements StudentMapper {

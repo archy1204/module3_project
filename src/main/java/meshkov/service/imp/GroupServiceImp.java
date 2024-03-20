@@ -22,18 +22,20 @@ public class GroupServiceImp implements GroupService {
 
     private final Repository repository;
     private final GroupMapper groupMapper;
-    private final int minStudents;
-    private final int maxStudents;
+    public final int minStudents;
+    public final int maxStudents;
 
-    private final Middleware middleware = Middleware.link(
-            new GroupNumberCheck(),
-            new StudentsInGroupCheck()
-    );
+    private final Middleware middleware;
 
     public GroupServiceImp(Repository repository, GroupMapper groupMapper) {
         log.debug("constructor method invoked");
         this.repository = repository;
         this.groupMapper = groupMapper;
+
+        middleware = Middleware.link(
+                new GroupNumberCheck(repository),
+                new StudentsInGroupCheck(repository)
+        );
 
         Properties properties = new Properties();
         try (BufferedReader propertyReader = Files.newBufferedReader(Path.of(FileConstants.PROPERTY_FILE_NAME))) {
@@ -52,10 +54,10 @@ public class GroupServiceImp implements GroupService {
     }
 
     @Override
-    public Group getGroupByNumber(int id) throws GroupNotFoundException {
+    public Group getGroupByNumber(String number) throws GroupNotFoundException {
         log.debug("getGroupByNumber method invoked");
-        log.debug("id = {}", id);
-        return repository.getGroupByNumber(id);
+        log.debug("id = {}", number);
+        return repository.getGroupByNumber(number);
     }
 
     @Override
@@ -66,7 +68,7 @@ public class GroupServiceImp implements GroupService {
     }
 
     @Override
-    public Group createGroup(GroupRequest groupRequest) throws StudentNotFoundException, GroupNotFoundException, InvalidArgumentsException, TeacherNotFoundException, TimetableNotFoundException, InvalidAmountException {
+    public Group createGroup(GroupRequest groupRequest) throws GroupNotFoundException, InvalidArgumentsException, TeacherNotFoundException, TimetableNotFoundException, InvalidAmountException {
         log.debug("createGroup method invoked");
         Group groupToCreate = groupMapper.mapToModel(groupRequest);
         groupToCreate.setId(-1);
@@ -82,26 +84,27 @@ public class GroupServiceImp implements GroupService {
     }
 
     @Override
-    public Group addStudentsToGroup(int number, List<Integer> studentsId) throws StudentNotFoundException, GroupNotFoundException, InvalidArgumentsException, TeacherNotFoundException, TimetableNotFoundException, InvalidAmountException {
+    public Group addStudentsToGroup(String number, List<Integer> studentsId) throws StudentNotFoundException, GroupNotFoundException, InvalidArgumentsException, TeacherNotFoundException, TimetableNotFoundException, InvalidAmountException {
         log.debug("addStudentsToGroup method invoked");
         log.debug("number = {}, studentsId = {}", number, studentsId);
         Group groupWithNewStudentsToCheck = new Group();
         groupWithNewStudentsToCheck.setStudents(repository.getStudentListById(studentsId));
-        groupWithNewStudentsToCheck.setNumber(Integer.toString(number));
+        groupWithNewStudentsToCheck.setNumber(number);
+        groupWithNewStudentsToCheck.setId(-2);
 
         if (!middleware.check(groupWithNewStudentsToCheck))
             throw new InvalidArgumentsException();
 
-        if ((repository.getGroupByNumber(number).getStudents().size() + studentsId.size()) < maxStudents)
+        if ((repository.getGroupByNumber(number).getStudents().size() + studentsId.size()) <= maxStudents)
             return repository.addStudentsToGroup(number, studentsId);
         else
             throw new InvalidAmountException();
     }
 
     @Override
-    public Group deleteGroup(int id) throws GroupNotFoundException {
+    public Group deleteGroup(String number) throws GroupNotFoundException {
         log.debug("deleteGroup method invoked");
-        log.debug("id = {}", id);
-        return repository.deleteGroup(id);
+        log.debug("id = {}", number);
+        return repository.deleteGroup(number);
     }
 }
