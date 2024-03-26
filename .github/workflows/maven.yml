@@ -2,7 +2,7 @@ name: Test covering
 
 on:
   push:
-    branches: [ "master", "develope" ]
+    branches: [ "master", "develope", "develop"]
   pull_request:
     branches: [ "master" ]
 
