@@ -1,0 +1,117 @@
+392  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - constructor method invoked
+402  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getInstance method invoked
+417  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createStudent method invoked
+417  [main] DEBUG m.repository.imp.SimpleRepository - -student = Student(id=1, name=John, surname=Key, birthday=01.06.1999, phoneNumber=89080967456, groupNumber=1142)
+430  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createStudent method invoked
+430  [main] DEBUG m.repository.imp.SimpleRepository - -student = Student(id=2, name=Jenny, surname=Law, birthday=12.09.1995, phoneNumber=89080957823, groupNumber=1142)
+430  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createStudent method invoked
+430  [main] DEBUG m.repository.imp.SimpleRepository - -student = Student(id=3, name=Kerri, surname=Malem, birthday=23.01.2000, phoneNumber=89193412753, groupNumber=1143)
+430  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createStudent method invoked
+430  [main] DEBUG m.repository.imp.SimpleRepository - -student = Student(id=4, name=Michael, surname=Warshtok, birthday=26.10.1998, phoneNumber=89080967249, groupNumber=1145)
+430  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createStudent method invoked
+430  [main] DEBUG m.repository.imp.SimpleRepository - -student = Student(id=5, name=Van, surname=Grat, birthday=05.08.1997, phoneNumber=89110456523, groupNumber=1145)
+453  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getAllStudents method invoked
+458  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getStudentById method invoked
+458  [main] DEBUG m.repository.imp.SimpleRepository - -id = 1
+472  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getStudentsByNameAndSurname method invoked
+472  [main] DEBUG m.repository.imp.SimpleRepository - -name = Kerri, surname = Malem
+480  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getStudentListById method invoked
+481  [main] DEBUG m.repository.imp.SimpleRepository - -ids = [2, 3, 4]
+482  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getStudentById method invoked
+483  [main] DEBUG m.repository.imp.SimpleRepository - -id = 2
+484  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getStudentById method invoked
+485  [main] DEBUG m.repository.imp.SimpleRepository - -id = 3
+486  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getStudentById method invoked
+486  [main] DEBUG m.repository.imp.SimpleRepository - -id = 4
+490  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - changeStudentData method invoked
+491  [main] DEBUG m.repository.imp.SimpleRepository - -id = 5, studentUpdate = Student(id=5, name=Radar, surname=Grat, birthday=05.08.1997, phoneNumber=89110456523, groupNumber=1145)
+491  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getStudentById method invoked
+494  [main] DEBUG m.repository.imp.SimpleRepository - -id = 5
+499  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - deleteStudent method invoked
+499  [main] DEBUG m.repository.imp.SimpleRepository - -id = 5
+500  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getStudentById method invoked
+500  [main] DEBUG m.repository.imp.SimpleRepository - -id = 5
+500  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getAllStudents method invoked
+500  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createStudent method invoked
+500  [main] DEBUG m.repository.imp.SimpleRepository - -student = Student(id=5, name=Radar, surname=Grat, birthday=05.08.1997, phoneNumber=89110456523, groupNumber=1145)
+504  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createTeacher method invoked
+504  [main] DEBUG m.repository.imp.SimpleRepository - -teacher = Teacher(id=1, name=John, surname=Key, subjects=[ENGLISH, HISTORY, SOCIOLOGY], experience=5)
+528  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createTeacher method invoked
+529  [main] DEBUG m.repository.imp.SimpleRepository - -teacher = Teacher(id=2, name=Marry, surname=Roana, subjects=[PROGRAMMING, MATH], experience=9)
+529  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createTeacher method invoked
+529  [main] DEBUG m.repository.imp.SimpleRepository - -teacher = Teacher(id=3, name=Alex, surname=Aleman, subjects=[PHYSICS, MATH], experience=5)
+532  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getAllTeachers method invoked
+538  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getTeacherById method invoked
+538  [main] DEBUG m.repository.imp.SimpleRepository - -id = 2
+545  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getTeachersByNameAndSurname method invoked
+545  [main] DEBUG m.repository.imp.SimpleRepository - -name = Marry, surname = Roana
+548  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - addSubjects method invoked
+548  [main] DEBUG m.repository.imp.SimpleRepository - -id = 3, subjects = [PHILOSOPHY]
+548  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getTeacherById method invoked
+548  [main] DEBUG m.repository.imp.SimpleRepository - -id = 3
+550  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - deleteTeacher method invoked
+551  [main] DEBUG m.repository.imp.SimpleRepository - -id = 3
+551  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getTeacherById method invoked
+551  [main] DEBUG m.repository.imp.SimpleRepository - -id = 3
+551  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createTeacher method invoked
+551  [main] DEBUG m.repository.imp.SimpleRepository - -teacher = Teacher(id=3, name=Alex, surname=Aleman, subjects=[PHYSICS, MATH, PHILOSOPHY], experience=5)
+553  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createGroup method invoked
+553  [main] DEBUG m.repository.imp.SimpleRepository - -timetable = Group(id=1, number=1142, students=[Student(id=1, name=John, surname=Key, birthday=01.06.1999, phoneNumber=89080967456, groupNumber=1142), Student(id=2, name=Jenny, surname=Law, birthday=12.09.1995, phoneNumber=89080957823, groupNumber=1142)])
+561  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createGroup method invoked
+561  [main] DEBUG m.repository.imp.SimpleRepository - -timetable = Group(id=2, number=1145, students=[Student(id=4, name=Michael, surname=Warshtok, birthday=26.10.1998, phoneNumber=89080967249, groupNumber=1145), Student(id=5, name=Radar, surname=Grat, birthday=05.08.1997, phoneNumber=89110456523, groupNumber=1145)])
+565  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getAllGroups method invoked
+572  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getGroupByNumber method invoked
+572  [main] DEBUG m.repository.imp.SimpleRepository - -id = 1142
+580  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getGroupsByNameAndSurname method invoked
+621  [main] DEBUG m.repository.imp.SimpleRepository - -name = Jenny, surname = Law
+621  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getStudentsByNameAndSurname method invoked
+621  [main] DEBUG m.repository.imp.SimpleRepository - -name = Jenny, surname = Law
+625  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - addStudentsToGroup method invoked
+625  [main] DEBUG m.repository.imp.SimpleRepository - -number = 1142, studentsId = [3]
+626  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getGroupByNumber method invoked
+627  [main] DEBUG m.repository.imp.SimpleRepository - -id = 1142
+627  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getStudentById method invoked
+627  [main] DEBUG m.repository.imp.SimpleRepository - -id = 3
+631  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - deleteGroup method invoked
+631  [main] DEBUG m.repository.imp.SimpleRepository - -id = 1145
+631  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getGroupByNumber method invoked
+631  [main] DEBUG m.repository.imp.SimpleRepository - -id = 1145
+632  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createGroup method invoked
+632  [main] DEBUG m.repository.imp.SimpleRepository - -timetable = Group(id=2, number=1145, students=[Student(id=4, name=Michael, surname=Warshtok, birthday=26.10.1998, phoneNumber=89080967249, groupNumber=null), Student(id=5, name=Radar, surname=Grat, birthday=05.08.1997, phoneNumber=89110456523, groupNumber=null)])
+635  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createTimetable method invoked
+636  [main] DEBUG m.repository.imp.SimpleRepository - -timetable = Timetable(groupNumber=1142, teacherId=1, startDateTime=2024-07-11 14:00, endDateTime=2024-07-11 16:00)
+643  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createTimetable method invoked
+643  [main] DEBUG m.repository.imp.SimpleRepository - -timetable = Timetable(groupNumber=1142, teacherId=2, startDateTime=2024-07-11 18:00, endDateTime=2024-07-11 20:00)
+644  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createTimetable method invoked
+644  [main] DEBUG m.repository.imp.SimpleRepository - -timetable = Timetable(groupNumber=1145, teacherId=1, startDateTime=2024-07-11 14:00, endDateTime=2024-07-11 16:00)
+644  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - createTimetable method invoked
+644  [main] DEBUG m.repository.imp.SimpleRepository - -timetable = Timetable(groupNumber=1145, teacherId=3, startDateTime=2024-07-12 14:00, endDateTime=2024-07-12 16:00)
+648  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getAllTimetable method invoked
+652  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getTimetableByGroupNumber method invoked
+653  [main] DEBUG m.repository.imp.SimpleRepository - -number = 1145
+657  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getTimetableByStudent method invoked
+657  [main] DEBUG m.repository.imp.SimpleRepository - -name = Jenny, surname = Law
+657  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getGroupsByNameAndSurname method invoked
+657  [main] DEBUG m.repository.imp.SimpleRepository - -name = Jenny, surname = Law
+657  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getStudentsByNameAndSurname method invoked
+658  [main] DEBUG m.repository.imp.SimpleRepository - -name = Jenny, surname = Law
+661  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getTimetableByTeacher method invoked
+661  [main] DEBUG m.repository.imp.SimpleRepository - -name = John, surname = Key
+661  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getTeachersByNameAndSurname method invoked
+661  [main] DEBUG m.repository.imp.SimpleRepository - -name = John, surname = Key
+665  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getTimetableByTeacher method invoked
+665  [main] DEBUG m.repository.imp.SimpleRepository - -id = 2
+665  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getTeacherById method invoked
+665  [main] DEBUG m.repository.imp.SimpleRepository - -id = 2
+668  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getTimetableByDate method invoked
+669  [main] DEBUG m.repository.imp.SimpleRepository - -date = 11/07/2024
+734  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - updateTimetable method invoked
+734  [main] DEBUG m.repository.imp.SimpleRepository - -date = 12/07/2024, newTimetables = [Timetable(groupNumber=1145, teacherId=3, startDateTime=2024-07-12 10:00, endDateTime=2024-07-12 12:00)]
+734  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getTimetableByDate method invoked
+734  [main] DEBUG m.repository.imp.SimpleRepository - -date = 12/07/2024
+738  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - deleteTimetableByDateAndGroupNumber method invoked
+738  [main] DEBUG m.repository.imp.SimpleRepository - -date = 12/07/2024, groupNumber = 1145
+738  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getTimetableByDate method invoked
+738  [main] DEBUG m.repository.imp.SimpleRepository - -date = 12/07/2024
+744  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - deleteAllTimetable method invoked
+744  [main] DEBUG m.repository.imp.SimpleRepository - -SimpleRepository - getAllTimetable method invoked
