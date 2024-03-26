@@ -9,7 +9,7 @@ import meshkov.model.Student;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-25T18:40:03+0300",
+    date = "2024-03-25T19:51:21+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 18.0.1.1 (Oracle Corporation)"
 )
 public class GroupMapperImpl implements GroupMapper {
