@@ -127,7 +127,7 @@ public class TimetableServlet extends HttpServlet {
             out.flush();
             resp.setStatus(400);
         } catch (InvalidAmountException e) {
-            ErrorResponse errorResponse = new ErrorResponse("Wrong amount of lessons. It must be fewer than " + maxLessons);
+            ErrorResponse errorResponse = new ErrorResponse("Wrong amount of lessons. It must be fewer than " + (maxLessons + 1));
             log.error("Exception " + e.getClass().getSimpleName() + " was thrown. Error - " + errorResponse.getErrorId());
             out.println(errorResponse);
             out.flush();
@@ -163,7 +163,7 @@ public class TimetableServlet extends HttpServlet {
             out.flush();
             resp.setStatus(400);
         } catch (InvalidAmountException e) {
-            ErrorResponse errorResponse = new ErrorResponse("Wrong amount of lessons. It must be fewer than " + maxLessons);
+            ErrorResponse errorResponse = new ErrorResponse("Wrong amount of lessons. It must be fewer than " + (maxLessons + 1));
             log.error("Exception " + e.getClass().getSimpleName() + " was thrown. Error - " + errorResponse.getErrorId());
             out.println(errorResponse);
             out.flush();

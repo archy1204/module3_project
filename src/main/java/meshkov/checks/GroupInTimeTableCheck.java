@@ -37,7 +37,11 @@ public class GroupInTimeTableCheck extends Middleware {
         for (Timetable timetable : groupTimetables) {
             LocalDateTime startTime = LocalDateTime.parse(timetable.getStartDateTime(), timetableFormat);
             LocalDateTime endTime = LocalDateTime.parse(timetable.getEndDateTime(), timetableFormat);
-            if (startTimeToCheck.equals(startTime) && endTimeToCheck.equals(endTime)) {
+            if (startTimeToCheck.equals(startTime) || endTimeToCheck.equals(endTime)
+                    || startTimeToCheck.equals(endTime) || endTimeToCheck.equals(startTime)
+                    || startTimeToCheck.isAfter(startTime) && startTimeToCheck.isBefore(endTime)
+                    || endTimeToCheck.isAfter(startTime) && endTimeToCheck.isBefore(endTime)
+                    || startTimeToCheck.isBefore(startTime) && endTimeToCheck.isAfter(endTime)) {
                 log.debug("GroupInTimeTable check FAIL");
                 return false;
             }

@@ -126,8 +126,8 @@ public class GroupServlet extends HttpServlet {
             out.flush();
             resp.setStatus(400);
         } catch (InvalidAmountException e) {
-            ErrorResponse errorResponse = new ErrorResponse("Wrong amount of students. It must be more than " + minStudents + " and fewer than "
-                    + maxStudents);
+            ErrorResponse errorResponse = new ErrorResponse("Wrong amount of students. It must be more than " + (minStudents - 1) + " and fewer than "
+                    + (maxStudents + 1));
             log.error("Exception " + e.getClass().getSimpleName() + " was thrown. Error - " + errorResponse.getErrorId());
             out.println(errorResponse);
             out.flush();
@@ -163,8 +163,8 @@ public class GroupServlet extends HttpServlet {
             out.flush();
             resp.setStatus(400);
         } catch (InvalidAmountException e) {
-            ErrorResponse errorResponse = new ErrorResponse("Wrong amount of students. It must be more than " + minStudents + " and fewer than "
-                    + maxStudents);
+            ErrorResponse errorResponse = new ErrorResponse("Wrong amount of students. It must be more than " + (minStudents - 1) + " and fewer than "
+                    + (maxStudents + 1));
             log.error("Exception " + e.getClass().getSimpleName() + " was thrown. Error - " + errorResponse.getErrorId());
             out.println(errorResponse);
             resp.setStatus(400);
