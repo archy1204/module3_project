@@ -2,9 +2,9 @@ name: Test covering
 
 on:
   push:
-    branches: [ "master", "develope", "develop"]
+    branches: [ "main", "develope", "develop"]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   build:
